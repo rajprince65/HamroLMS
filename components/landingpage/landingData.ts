@@ -1,19 +1,16 @@
 import type { NavItem, HeroSlide, AboutSection } from "./index";
 
 export const navItems: NavItem[] = [
-  { label: "Home", href: "#" },
+  { label: "Home", href: "#home" },
   { label: "About Us", href: "#about" },
+  { label: "Programs", href: "#programs" },
+  { label: "Teachers", href: "#teachers" },
   {
     label: "Gallery",
     href: "#gallery",
-    children: [
-      { label: "Photo Gallery", href: "#photos" },
-      { label: "Video Gallery", href: "#videos" },
-    ],
   },
   { label: "Faqs", href: "#faqs" },
   { label: "Contact Us", href: "#contact" },
-  
 ];
 
 export const heroSlides: HeroSlide[] = [
@@ -95,5 +92,5 @@ export const aboutData: AboutSection = {
 
 // School logo URLs (use in Navbar or anywhere the school logo is needed)
 export const schoolLogo = {
-  png: "https://similarpng.com/_next/image?url=https%3A%2F%2Fimage.similarpng.com%2Ffile%2Fsimilarpng%2Fvery-thumbnail%2F2021%2F09%2FSuccess-student-Logo-on-transparent-background-PNG.png&w=3840&q=75",
+  png: "https://png.pngtree.com/png-vector/20230315/ourmid/pngtree-education-school-logo-design-college-academic-student-vector-png-image_50796580.jpg",
 };

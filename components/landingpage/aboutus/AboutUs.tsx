@@ -21,13 +21,13 @@ export default function AboutUs() {
 
         <div className="w-full relative max-w-[720px]">
           <div className="mb-6 flex items-center gap-3">
-            <div className="h-10 w-1 rounded-full bg-[#1D4B6E]" />
-            <span className="text-lg font-semibold leading-none text-[#0F4C78]">
+            <div className="h-10 w-1 rounded-full bg-[#279689]" />
+            <span className="text-lg font-semibold leading-none text-[#279689]">
               {sectionLabel}
             </span>
           </div>
 
-          <h2 className="mb-6 max-w-[680px] text-[30px] font-bold leading-[1.3] tracking-normal text-[#20242B] sm:text-[36px] lg:text-[42px]">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1a2d45] leading-tight mb-4">
             {heading}
           </h2>
 

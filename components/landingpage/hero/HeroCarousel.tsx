@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { heroSlides } from "../landingData";
 
-/* ─── Big swoosh single diagonal wave divider ─── */
 function CloudDivider() {
   const backPath = `M0,120 L0,36 Q360,90 720,24 Q1080,-18 1440,42 L1440,120 Z`;
   const frontPath = `M0,120 L0,54 Q360,108 720,42 Q1080,0 1440,62 L1440,120 Z`;
@@ -25,38 +24,27 @@ function CloudDivider() {
 
 export default function HeroCarousel() {
   const [current, setCurrent] = useState(0);
-  const [animating, setAnimating] = useState(false);
 
-  const goTo = useCallback(
-    (idx: number) => {
-      if (animating || idx === current) return;
-      setAnimating(true);
-      setCurrent(idx);
-      setTimeout(() => setAnimating(false), 500);
-    },
-    [animating, current]
-  );
+  const goTo = (idx: number) => {
+    const next = (idx + heroSlides.length) % heroSlides.length;
+    setCurrent(next);
+  };
 
-  const prev = () =>
-    goTo((current - 1 + heroSlides.length) % heroSlides.length);
-  const next = () => goTo((current + 1) % heroSlides.length);
-
-  // Auto-play every 5s
+  // Autoplay
   useEffect(() => {
-    const timer = setInterval(next, 5000);
+    const timer = setInterval(() => {
+      setCurrent((c) => (c + 1) % heroSlides.length);
+    }, 3000);
     return () => clearInterval(timer);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [current]);
-
-  const slide = heroSlides[current];
+  }, []);
 
   return (
     <section className="relative w-full h-[420px] sm:h-[480px] md:h-[560px] lg:h-[600px] overflow-hidden">
 
-      {/* ── Background images (sliding carousel) ── */}
+      {/* Background images */}
       <div className="absolute inset-0 overflow-hidden">
         <div
-          className="h-full flex transition-transform duration-500"
+          className="h-full flex transition-transform duration-500 ease-in-out"
           style={{ transform: `translateX(-${current * 100}%)` }}
           aria-hidden="true"
         >
@@ -70,12 +58,11 @@ export default function HeroCarousel() {
         </div>
       </div>
 
-      {/* ── Cloud bottom wave ── */}
       <CloudDivider />
 
-      {/* ── Prev arrow ── */}
+      {/* Prev arrow */}
       <button
-        onClick={prev}
+        onClick={() => goTo(current - 1)}
         aria-label="Previous slide"
         className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 z-20 bg-white/80 hover:bg-white shadow-md rounded-lg w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center transition-all duration-200 hover:scale-105"
       >
@@ -84,9 +71,9 @@ export default function HeroCarousel() {
         </svg>
       </button>
 
-      {/* ── Next arrow ── */}
+      {/* Next arrow */}
       <button
-        onClick={next}
+        onClick={() => goTo(current + 1)}
         aria-label="Next slide"
         className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 z-20 bg-white/80 hover:bg-white shadow-md rounded-lg w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center transition-all duration-200 hover:scale-105"
       >
@@ -95,7 +82,7 @@ export default function HeroCarousel() {
         </svg>
       </button>
 
-      {/* ── Dot indicators ── */}
+      {/* Dot indicators */}
       <div className="absolute bottom-12 sm:bottom-14 left-1/2 -translate-x-1/2 z-20 flex gap-2">
         {heroSlides.map((_, i) => (
           <button
